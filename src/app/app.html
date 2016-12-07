@@ -1,0 +1,38 @@
+<ion-menu id="unauthenticated" side="left" [content]="mycontent">
+    <ion-content>
+        <ion-list>
+            <ion-list-header>
+            PHOTO FIND
+               <div *ngIf="auth.authenticated()">
+    <ion-card>
+      <ion-item *ngIf="auth.user">
+        <ion-avatar item-left>
+          <img src="{{ auth.user.picture }}">
+        </ion-avatar>
+        <h2>{{ auth.user.nickname }}</h2>
+        <p>{{ auth.user.email }}</p>
+      </ion-item>
+         <button *ngIf="auth.authenticated()" ion-item menuClose color="primary" (click)="auth.logout()">
+                <ion-icon item-left name="logo-facebook"></ion-icon>
+                Log Out
+          </button>
+    </ion-card>
+  </div>
+            </ion-list-header>
+            <button *ngIf="!auth.authenticated()" ion-item menuClose color="primary" (click)="auth.login()">
+                <ion-icon item-left name="logo-facebook"></ion-icon>
+                Login with Facebook
+            </button>
+
+             <button (click)="goToSettingsPage()" ion-item menuClose detail-none>
+                Settings
+            </button>
+
+            <button ion-item menuClose detail-none>
+                Close Menu
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
